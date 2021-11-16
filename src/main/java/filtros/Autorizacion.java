@@ -34,7 +34,7 @@ public class Autorizacion implements Filter {
 
         HttpServletRequest servletRequest = (HttpServletRequest) request;
         String url = servletRequest.getRequestURI();
-        if (url.contains("/usuarios/login") || url.contains("/")) {
+        if (url.contains("/usuarios/login") || url.contains("/") || url.contains("/carrito") ) {
             chain.doFilter(request, response);
         } else {
             String hash = servletRequest.getHeader("Authorization");

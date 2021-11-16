@@ -77,6 +77,27 @@ public class ProductoDao {
 
         return producto;
     }
+    
+        public boolean productoExist(int id) {
+
+        try {
+            String sql = "SELECT po_id FROM productos WHERE po_id = ? AND po_activo = 'S'";
+
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                return true;
+            }
+            
+            return false;
+            
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
 
     public Producto addProducto(Producto producto) {
 

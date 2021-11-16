@@ -38,5 +38,26 @@ public class UsuarioDao {
 
         return usuario;
     }
+    
+        public boolean userExist(int id) {
+
+        try {
+            String sql = "SELECT us_id FROM usuarios WHERE us_id = ? AND us_activo = 'S'";
+
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                return true;
+            }
+            
+            return false;
+            
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
 
 }
