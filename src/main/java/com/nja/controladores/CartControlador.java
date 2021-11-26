@@ -2,6 +2,7 @@ package com.nja.controladores;
 
 import com.nja.dao.CartDao;
 import com.nja.modelos.Cart;
+import com.nja.modelos.Producto;
 import com.nja.utilidades.Mensajes;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -25,14 +26,15 @@ public class CartControlador {
 
     //get es para obtener datos
     @GET
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getCarritos(){        
-        return this.CartDAO.getCarritos();
+    public List<Producto> getCarritos(@PathParam("id") int id){
+        return this.CartDAO.getCarritos(id);
     }
     
     //solicitar datos de un solo recurso GET
     @GET
-    @Path("/{id}")
+    @Path("/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCarrito(@PathParam("id") int id){
         String msj = this.CartDAO.getCarrito(id);        

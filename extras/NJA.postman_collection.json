@@ -141,6 +141,141 @@
 			]
 		},
 		{
+			"name": "Contactenos",
+			"item": [
+				{
+					"name": "añadir Contactenos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":0,\r\n    \"nombre\":\"Matias\",\r\n    \"email\":\"matias@gmail.com\",\r\n    \"asunto\":\"Importante\",\r\n    \"mensaje\":\"Alguna vez haz sido tu propio jefe?\",\r\n    \"fecha\":\"Hoy\",\r\n    \"leido\":\"N\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/contactenos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"contactenos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Contactenos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"Matias\",\r\n    \"email\":\"matias@gmail.com\",\r\n    \"asunto\":\"Importante\",\r\n    \"mensaje\":\"Alguna vez haz sido tu propio jefe?\",\r\n    \"fecha\":\"Hoy\",\r\n    \"leido\":\"S\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/contactenos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"contactenos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Contactenos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/contactenos/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"contactenos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Contactenos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/contactenos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"contactenos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Contactenos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/contactenos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"contactenos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Login",
 			"item": [
 				{
@@ -187,7 +322,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"po_id\": 2,\r\n    \"us_id\": 1\r\n}",
+							"raw": "{\r\n    \"po_id\": 2,\r\n    \"us_id\": 2,\r\n    \"precio\": 50.0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,7 +352,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/nja/api/v1/carrito/0",
+							"raw": "http://localhost:8080/nja/api/v1/carrito/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -228,7 +363,7 @@
 								"api",
 								"v1",
 								"carrito",
-								"0"
+								"3"
 							]
 						}
 					},
@@ -298,6 +433,140 @@
 								"v1",
 								"carrito",
 								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "añadir categorias",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":0,\r\n    \"nombre\":\"Zapatos\",\r\n    \"imagen\":\"Zapatos1.jpg\",\r\n    \"activo\": \"S\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"nombre\": \"Zapatos\",\r\n    \"imagen\": \"Zapatos2.jpg\",\r\n    \"activo\": \"S\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/categorias/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"categorias",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/nja/api/v1/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nja",
+								"api",
+								"v1",
+								"categorias"
 							]
 						}
 					},

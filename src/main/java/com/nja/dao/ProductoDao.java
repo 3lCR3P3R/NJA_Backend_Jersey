@@ -29,7 +29,7 @@ public class ProductoDao {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Producto p = new Producto();
-                
+
                 p.setId(rs.getInt("po_id"));
                 p.setNombre(rs.getString("po_nombre"));
                 p.setMarca(rs.getString("po_marca"));
@@ -59,7 +59,7 @@ public class ProductoDao {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Producto p = new Producto();
-                
+
                 p.setId(rs.getInt("po_id"));
                 p.setNombre(rs.getString("po_nombre"));
                 p.setMarca(rs.getString("po_marca"));
@@ -77,8 +77,8 @@ public class ProductoDao {
 
         return producto;
     }
-    
-        public boolean productoExist(int id) {
+
+    public boolean productoExist(int id) {
 
         try {
             String sql = "SELECT po_id FROM productos WHERE po_id = ? AND po_activo = 'S'";
@@ -86,13 +86,13 @@ public class ProductoDao {
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 return true;
             }
-            
+
             return false;
-            
+
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             return false;
@@ -105,7 +105,7 @@ public class ProductoDao {
             String sql = "INSERT INTO productos VALUES (?,?,?,?,?,?,?,?)";
 
             PreparedStatement pst = this.conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            
+
             pst.setInt(1, 0);
             pst.setString(2, producto.getNombre());
             pst.setString(3, producto.getMarca());
@@ -114,7 +114,7 @@ public class ProductoDao {
             pst.setInt(6, producto.getCantidad());
             pst.setString(7, producto.getImagen());
             pst.setString(8, producto.getActivo());
-            
+
             int filas = pst.executeUpdate();
 
             if (filas > 0) {
@@ -137,7 +137,7 @@ public class ProductoDao {
             String sql = "UPDATE productos SET po_nombre = ?, po_marca = ?, po_precio = ?, po_categoria = ?, po_cantidad = ?, po_imagen = ?, po_activo = ? WHERE po_id = ?";
 
             PreparedStatement pst = this.conexion.prepareStatement(sql);
-            
+
             pst.setString(1, producto.getNombre());
             pst.setString(2, producto.getMarca());
             pst.setFloat(3, producto.getPrecio());
@@ -146,7 +146,7 @@ public class ProductoDao {
             pst.setString(6, producto.getImagen());
             pst.setString(7, producto.getActivo());
             pst.setInt(8, producto.getId());
-            
+
             int filas = pst.executeUpdate();
 
             if (filas > 0) {

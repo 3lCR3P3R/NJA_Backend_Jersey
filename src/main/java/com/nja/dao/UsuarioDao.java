@@ -16,9 +16,8 @@ public class UsuarioDao {
     }
 
     public Usuario login(Usuario usuario) {
-
         try {
-            String sql = "SELECT us_id, us_tipo, us_activo FROM usuarios WHERE us_usuario = ? AND us_password = ? AND us_activo = 'S'";
+            String sql = "SELECT us_id, us_rol, us_activo FROM usuarios WHERE us_usuario = ? AND us_password = ? AND us_activo = 'S'";
 
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, usuario.getUsuario());
@@ -27,7 +26,7 @@ public class UsuarioDao {
             while (rs.next()) {
 
                 usuario.setId(rs.getInt("us_id"));
-                usuario.setTipo(rs.getInt("us_tipo"));
+                usuario.setRol(rs.getInt("us_tipo"));
                 usuario.setActivo(rs.getString("us_activo"));
 
                 return usuario;
@@ -38,8 +37,8 @@ public class UsuarioDao {
 
         return usuario;
     }
-    
-        public boolean userExist(int id) {
+
+    public boolean userExist(int id) {
 
         try {
             String sql = "SELECT us_id FROM usuarios WHERE us_id = ? AND us_activo = 'S'";
@@ -47,13 +46,13 @@ public class UsuarioDao {
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 return true;
             }
-            
+
             return false;
-            
+
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             return false;

@@ -1,7 +1,11 @@
 package com.nja.modelos;
 
-public class Usuario {
-
+/**
+ *
+ * @author Camilo
+ */
+public class Administrador {
+ 
     private int id;
     private String usuario;
     private String password;
@@ -9,12 +13,11 @@ public class Usuario {
     private String telefono;
     private int rol;
     private String activo;
-    private String hash;
 
-    public Usuario() {
+    public Administrador() {
     }
 
-    public Usuario(int id, String usuario, String password, String correo, String telefono, int rol, String activo, String hash) {
+    public Administrador(int id, String usuario, String password, String correo, String telefono, int rol, String activo) {
         this.id = id;
         this.usuario = usuario;
         this.password = password;
@@ -22,7 +25,6 @@ public class Usuario {
         this.telefono = telefono;
         this.rol = rol;
         this.activo = activo;
-        this.hash = hash;
     }
 
     public int getId() {
@@ -80,15 +82,5 @@ public class Usuario {
     public void setActivo(String activo) {
         this.activo = activo;
     }
-
-    public String getHash() {
-        return hash;
-    }
-
-    public void setHash(String hash) {
-        this.hash = hash;
-    }
-
     
-
 }
