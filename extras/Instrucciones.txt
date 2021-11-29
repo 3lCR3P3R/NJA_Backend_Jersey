@@ -1,6 +1,7 @@
 INSTRUCCIONES:
 
 SPRINT # 2
+Repositorio: https://github.com/3lCR3P3R/NJA_Backend_Jersey
 
 
 /* Login */
