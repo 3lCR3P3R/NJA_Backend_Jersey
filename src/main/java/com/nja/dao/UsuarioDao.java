@@ -26,7 +26,7 @@ public class UsuarioDao {
             while (rs.next()) {
 
                 usuario.setId(rs.getInt("us_id"));
-                usuario.setRol(rs.getInt("us_tipo"));
+                usuario.setRol(rs.getInt("us_rol"));
                 usuario.setActivo(rs.getString("us_activo"));
 
                 return usuario;

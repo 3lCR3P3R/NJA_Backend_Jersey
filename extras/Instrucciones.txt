@@ -2,6 +2,33 @@ INSTRUCCIONES:
 
 SPRINT # 2
 
+
+/* Login */
+
+RECURSO # 1: Login
+URL: http://localhost:8080/nja/api/v1/usuarios/login/
+VERBO: POST
+CONSUME: JSON de un recurso carrito
+{
+    "usuario":"Matthew",
+    "password":"12345"
+}
+PRODUCE: JSON de Carrito 
+{
+    "id": 2,
+    "usuario": "Matthew",
+    "password": "",
+    "correo": null,
+    "telefono": null,
+    "rol": 1,
+    "activo": "S",
+    "hash": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXR0aGV3IiwiaWF0IjoxNjM4MjI1Nzg1LCJleHAiOjE2MzgyMjU5MDUsImlkIjoyLCJ1c3VhcmlvIjoiTWF0dGhldyJ9.Lnd7D43pL68eFQXLpohLH9Pldqh4Y3TgtXHAQl60dTI"
+}
+Observaciones: el objeto de respuesta es el mismo de entrada pero con un correo, telefono, rol como null ya que no nos interesa esos datos en el login
+
+
+
+
 /* Vendedores */
 
 Observacion general: El campo password sale "null", ya que no se consulta por ser un campo que preserva la privacidad del vendedor
@@ -108,3 +135,287 @@ VERBO: DELETE
 CONSUME: 
 PRODUCE: JSON de un administrador({"texto": "OK"})
 Observaciones: el objeto de respuesta indica que se realizo la tarea con exito, ademas se elimina el administrador indicando en la URL el ID del administrador. Ejemplo: http://localhost:8080/nja/api/v1/administradores/eliminar/8
+
+
+
+
+/* Carrito */
+
+
+RECURSO # 1: Consultar listado total de Cart (Carrito):
+URL: http://localhost:8080/nja/api/v1/carrito
+VERBO: GET
+CONSUME: URL Obtener carrito Comprador http://localhost:8080/nja/api/v1/carrito/2
+PRODUCE: JSON de Carrito     
+[
+    {
+        "id": 1,
+        "nombre": "Adidos",
+        "marca": "NJA",
+        "precio": 0.0,
+        "categoria": "Zapatos",
+        "cantidad": 0,
+        "imagen": "default.png",
+        "activo": "S"
+    }
+]
+
+
+RECURSO # 2: Crear Producto en Carrito
+URL: http://localhost:8080/nja/api/v1/carrito/
+VERBO: POST
+CONSUME: JSON de un recurso carrito
+{
+    "po_id": 2,
+    "us_id": 2,
+    "precio": 50.0
+}
+PRODUCE: JSON de Carrito 
+{
+    "ca_id": 6,
+    "po_id": 1,
+    "us_id": 2,
+    "precio": 50.0
+}
+
+RECURSO # 3: Eliminar Producto en Carrito
+URL: http://localhost:8080/nja/api/v1/carrito/
+VERBO: DELETE
+CONSUME: URL eliminar recurso http://localhost:8080/nja/api/v1/productos/5
+PRODUCE:  {"texto": "OK"}
+
+
+
+
+/* Contactenos */
+
+
+RECURSO # 1: Consultar listado total de Contactenos
+URL: http://localhost:8080/api/contactanos
+VERBO: GET
+CONSUME: VACIO
+PRODUCE: JSON de Contactenos
+[
+    {
+        "id": 2,
+        "nombre": "Matias",
+        "email": "matias@gmail.com",
+        "asunto": "Importante",
+        "mensaje": "Alguna vez haz sido tu propio jefe?",
+        "fecha": "2021-11-25 20:59:55",
+        "leido": "N"
+    }
+]
+
+
+RECURSO # 2: Crear Json en Contactenos
+URL: http://localhost:8080/api/contactanos
+VERBO: POST
+CONSUME: JSON de un recurso en Contactenos
+{
+    "id":0,
+    "nombre":"Matias",
+    "email":"matias@gmail.com",
+    "asunto":"Importante",
+    "mensaje":"Alguna vez haz sido tu propio jefe?",
+    "fecha":"Hoy",
+    "leido":"N"
+}
+PRODUCE: JSON de Oferta
+{
+    "id": 2,
+    "nombre": "Matias",
+    "email": "matias@gmail.com",
+    "asunto": "Importante",
+    "mensaje": "Alguna vez haz sido tu propio jefe?",
+    "fecha": "2021-11-25 20:59:55",
+    "leido": "N"
+}
+
+
+
+
+/* Ofertas */
+
+
+RECURSO # 1: Consultar listado total de Ofertas
+URL: http://localhost:8080/nja/api/v1/ofertas
+VERBO: GET
+CONSUME: VACIO
+PRODUCE: JSON de Ofertas
+[
+    {
+        "id": 1,
+        "nombre": "Adidos",
+        "precio": 34.4,
+        "precioDescuento": 16.2,
+        "cantidad": 5,
+        "fechaMaxima": "2025-11-20",
+        "po_id": 1,
+        "activo": "S"
+    },
+    {
+        "id": 2,
+        "nombre": "Adidas 2",
+        "precio": 34.4,
+        "precioDescuento": 16.2,
+        "cantidad": 5,
+        "fechaMaxima": "2025-11-20",
+        "po_id": 1,
+        "activo": "S"
+    },
+    {
+        "id": 3,
+        "nombre": "Adidos 4",
+        "precio": 34.4,
+        "precioDescuento": 16.2,
+        "cantidad": 5,
+        "fechaMaxima": "2025-11-20",
+        "po_id": 1,
+        "activo": "S"
+    }
+]
+
+
+RECURSO # 2: Crear Oferta
+URL: http://localhost:8080/nja/api/v1/ofertas
+VERBO: POST
+CONSUME: JSON de un recurso            
+{
+    "id": 0,
+    "po_id": 1,
+    "nombre": "Nike",
+    "precio": 60.4,
+    "precioDescuento": 16.2,
+    "cantidad": 8,
+    "fechaMaxima": "2021-12-24",
+    "activo": "S"
+}
+PRODUCE: JSON de Oferta
+{
+    "id": 4,
+    "nombre": "Nike",
+    "precio": 60.4,
+    "precioDescuento": 16.2,
+    "cantidad": 8,
+    "fechaMaxima": "2021-12-24",
+    "po_id": 1,
+    "activo": "S"
+}
+
+
+RECURSO # 3: Editar Oferta
+URL: http://localhost:8080/nja/api/v1/ofertas
+VERBO: PUT
+CONSUME: JSON de un recurso
+{
+    "id": 4,
+    "po_id": 1,
+    "nombre": "Nike",
+    "precio": 60.4,
+    "precioDescuento": 16.2,
+    "cantidad": 8,
+    "fechaMaxima": "2021-12-24",
+    "activo": "N"
+}
+PRODUCE: JSON de Oferta {
+    "texto": "OK"
+}
+
+
+RECURSO # 4: Eliminar Oferta
+URL: http://localhost:8080/nja/api/v1/ofertas/5
+VERBO: DELETE
+CONSUME: URL eliminar recurso http://localhost:8080/nja/api/v1/ofertas/5
+PRODUCE:  { "texto": "OK"}
+
+
+
+
+/* Productos */
+
+
+RECURSO # 1: Consultar listado total de Productos
+URL: http://localhost:8080/nja/api/v1/productos
+VERBO: GET
+CONSUME: VACIO
+PRODUCE: JSON de Productos
+[
+    {
+        "id": 1,
+        "nombre": "Adidos",
+        "marca": "NJA",
+        "precio": 34.4,
+        "categoria": "Zapatos",
+        "cantidad": 1,
+        "imagen": "default.jpg",
+        "activo": "S"
+    },
+    {
+        "id": 2,
+        "nombre": "Adidas 2",
+        "marca": "NJA",
+        "precio": 34.4,
+        "categoria": "Zapatos",
+        "cantidad": 1,
+        "imagen": "default.jpg",
+        "activo": "S"
+    }
+]
+
+
+RECURSO # 2: Crear Producto
+URL: http://localhost:8080/nja/api/v1/productos
+VERBO: POST
+CONSUME: JSON de un recurso           
+{
+    "id": 0,
+    "nombre": "Niko",
+    "marca": "NJA",
+    "precio": 40.0,
+    "categoria": "Tennis",
+    "cantidad": 2,
+    "imagen": "default.jpg",
+    "activo": "S"
+}
+PRODUCE: JSON de Producto 
+{
+    "id": 3,
+    "nombre": "Niko",
+    "marca": "NJA",
+    "precio": 40.0,
+    "categoria": "Tennis",
+    "cantidad": 2,
+    "imagen": "default.jpg",
+    "activo": "S"
+}
+
+
+RECURSO # 3: Editar Producto
+URL: http://localhost:8080/nja/api/v1/productos
+VERBO: PUT
+CONSUME: JSON de un recurso       
+{
+    "id": 3,
+    "nombre": "Nike",
+    "marca": "NJA",
+    "precio": 42.0,
+    "categoria": "Tennis",
+    "cantidad": 3,
+    "imagen": "default.jpg",
+    "activo": "S"
+}
+PRODUCE: JSON de 
+{
+    "texto": "OK"
+}
+
+
+RECURSO # 4: Eliminar Producto
+URL: http://localhost:8080/nja/api/v1/productos/3
+VERBO: DELETE
+CONSUME: URL eliminar recurso http://localhost:8080/nja/api/v1/productos/3
+PRODUCE:  
+{
+    "texto": "OK"
+}

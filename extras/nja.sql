@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2021 a las 03:53:18
+-- Tiempo de generación: 29-11-2021 a las 23:18:36
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -98,6 +98,7 @@ INSERT INTO `contactenos` (`co_id`, `co_nombre`, `co_email`, `co_asunto`, `co_me
 
 CREATE TABLE `ofertas` (
   `of_id` int(11) NOT NULL,
+  `po_id` int(11) NOT NULL,
   `of_nombre` varchar(200) NOT NULL,
   `of_precio` double NOT NULL,
   `of_precioDescuento` double NOT NULL,
@@ -110,11 +111,10 @@ CREATE TABLE `ofertas` (
 -- Volcado de datos para la tabla `ofertas`
 --
 
-INSERT INTO `ofertas` (`of_id`, `of_nombre`, `of_precio`, `of_precioDescuento`, `of_cantidad`, `of_fechaMaxima`, `of_activo`) VALUES
-(1, 'Adidos', 34.4, 16.2, 5, '2025-11-20', 'S'),
-(2, 'Adidas 2', 34.4, 16.2, 5, '2025-11-20', 'S'),
-(3, 'Adidos 4', 34.4, 16.2, 5, '2025-11-20', 'S'),
-(4, 'Adidos 4', 34.4, 16.2, 5, '2025-11-20', 'S');
+INSERT INTO `ofertas` (`of_id`, `po_id`, `of_nombre`, `of_precio`, `of_precioDescuento`, `of_cantidad`, `of_fechaMaxima`, `of_activo`) VALUES
+(1, 1, 'Adidos', 34.4, 16.2, 5, '2025-11-20', 'S'),
+(2, 1, 'Adidas 2', 34.4, 16.2, 5, '2025-11-20', 'S'),
+(3, 1, 'Adidos 4', 34.4, 16.2, 5, '2025-11-20', 'S');
 
 -- --------------------------------------------------------
 
@@ -138,8 +138,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`po_id`, `po_nombre`, `po_marca`, `po_precio`, `po_categoria`, `po_cantidad`, `po_imagen`, `po_activo`) VALUES
-(1, 'Adidos', 'NJA', 34.4, 'Zapatos', 1, 'default.jpg', 'S'),
-(2, 'Adidas 2', 'NJA', 34.4, 'Zapatos', 1, 'default.jpg', 'S');
+(1, 'Adidos', 'NJA', 34.4, 'Zapatos', 50, 'default.png', 'S'),
+(4, 'Gucci2', 'Gucci2', 50, 'Zapatos', 1, 'default.png', 'N');
 
 -- --------------------------------------------------------
 
@@ -212,6 +212,12 @@ ALTER TABLE `contactenos`
   ADD PRIMARY KEY (`co_id`);
 
 --
+-- Indices de la tabla `ofertas`
+--
+ALTER TABLE `ofertas`
+  ADD PRIMARY KEY (`of_id`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
@@ -243,13 +249,19 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `catg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `catg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `contactenos`
 --
 ALTER TABLE `contactenos`
   MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `ofertas`
+--
+ALTER TABLE `ofertas`
+  MODIFY `of_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

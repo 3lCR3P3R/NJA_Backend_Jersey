@@ -23,7 +23,7 @@ public class OfertasDao {
         List<Ofertas> ofertas = new ArrayList<Ofertas>();
 
         try {
-            String sql = "SELECT of_id, of_nombre, of_precio, of_precioDescuento, of_cantidad, of_fechaMaxima FROM ofertas WHERE of_activo = 'S'";
+            String sql = "SELECT of_id, po_id, of_nombre, of_precio, of_precioDescuento, of_cantidad, of_fechaMaxima, of_activo FROM ofertas WHERE of_activo = 'S'";
 
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -31,11 +31,13 @@ public class OfertasDao {
                 Ofertas o = new Ofertas();
 
                 o.setId(rs.getInt("of_id"));
+                o.setPo_id(rs.getInt("po_id"));
                 o.setNombre(rs.getString("of_nombre"));
                 o.setPrecio(rs.getFloat("of_precio"));
                 o.setPrecioDescuento(rs.getFloat("of_precioDescuento"));
                 o.setCantidad(rs.getInt("of_cantidad"));
                 o.setFechaMaxima(rs.getString("of_fechaMaxima"));
+                o.setActivo(rs.getString("of_activo"));
 
                 ofertas.add(o);
             }
@@ -46,11 +48,11 @@ public class OfertasDao {
         return ofertas;
     }
 
-    public Ofertas getOfertas(int id) {
+    public Ofertas getOferta(int id) {
         Ofertas ofertas = new Ofertas();
 
         try {
-            String sql = "SELECT of_id, of_nombre, of_precio, of_precioDescuento, of_cantidad, of_fechaMaxima FROM Ofertas wHERE of_activo = 'S'";
+            String sql = "SELECT of_id, po_id, of_nombre, of_precio, of_precioDescuento, of_cantidad, of_fechaMaxima, of_activo FROM ofertas wHERE of_id = ? AND of_activo = 'S'";
 
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, id);
@@ -59,11 +61,13 @@ public class OfertasDao {
                 Ofertas o = new Ofertas();
 
                 o.setId(rs.getInt("of_id"));
+                o.setPo_id(rs.getInt("po_id"));
                 o.setNombre(rs.getString("of_nombre"));
                 o.setPrecio(rs.getFloat("of_precio"));
                 o.setPrecioDescuento(rs.getFloat("of_precioDescuento"));
                 o.setCantidad(rs.getInt("of_cantidad"));
                 o.setFechaMaxima(rs.getString("of_fechaMaxima"));
+                o.setActivo(rs.getString("of_activo"));
 
                 return o;
             }
@@ -78,15 +82,18 @@ public class OfertasDao {
 
         try {
             if (productoDAO.productoExist(ofertas.getPo_id())) {
-                String sql = "INSERT INTO ofertas VALUES (?,?,?,?,?,now(),'S')";
+                String sql = "INSERT INTO ofertas VALUES (?,?,?,?,?,?,?,'S')";
 
                 PreparedStatement pst = this.conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
                 pst.setInt(1, 0);
-                pst.setString(2, ofertas.getNombre());
-                pst.setFloat(3, ofertas.getPrecio());
-                pst.setFloat(4, ofertas.getPrecioDescuento());
-                pst.setInt(5, ofertas.getCantidad());
+                pst.setInt(2, ofertas.getPo_id());
+                pst.setString(3, ofertas.getNombre());
+                pst.setFloat(4, ofertas.getPrecio());
+                pst.setFloat(5, ofertas.getPrecioDescuento());
+                pst.setInt(6, ofertas.getCantidad());
+                pst.setString(7, ofertas.getFechaMaxima()); 
+
 
                 int filas = pst.executeUpdate();
 
@@ -107,24 +114,26 @@ public class OfertasDao {
     public boolean editOfertas(Ofertas ofertas) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE productos SET of_nombre = ?, of_precio = ?, of_precioDescuento = ?, of_cantidad = ?, of_fechaMaxima = ?, of_activo = ? WHERE of_id = ?";
+            if (productoDAO.productoExist(ofertas.getPo_id())) {
+                String sql = "UPDATE ofertas SET of_nombre = ?, of_precio = ?, of_precioDescuento = ?, of_cantidad = ?, of_fechaMaxima = ?, of_activo = ?, po_id = ? WHERE of_id = ?";
 
-            PreparedStatement pst = this.conexion.prepareStatement(sql);
+                PreparedStatement pst = this.conexion.prepareStatement(sql);
 
-            pst.setString(1, ofertas.getNombre());
-            pst.setFloat(2, ofertas.getPrecio());
-            pst.setFloat(3, ofertas.getPrecioDescuento());
-            pst.setInt(4, ofertas.getCantidad());
-            pst.setString(5, ofertas.getFechaMaxima());
-            pst.setString(6, ofertas.getActivo());
-            pst.setInt(7, ofertas.getId());
+                pst.setString(1, ofertas.getNombre());
+                pst.setFloat(2, ofertas.getPrecio());
+                pst.setFloat(3, ofertas.getPrecioDescuento());
+                pst.setInt(4, ofertas.getCantidad());
+                pst.setString(5, ofertas.getFechaMaxima());
+                pst.setString(6, ofertas.getActivo());
+                pst.setInt(7, ofertas.getPo_id());
+                pst.setInt(8, ofertas.getId());
 
-            int filas = pst.executeUpdate();
+                int filas = pst.executeUpdate();
 
-            if (filas > 0) {
-                resultado = true;
+                if (filas > 0) {
+                    resultado = true;
+                }
             }
-
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -135,7 +144,7 @@ public class OfertasDao {
     public boolean deleteProducto(int id) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM Ofertas WHERE of_id = ?";
+            String sql = "DELETE FROM ofertas WHERE of_id = ?";
 
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, id);

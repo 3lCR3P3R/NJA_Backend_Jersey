@@ -43,7 +43,7 @@ public class ofertasControlador {
         @Path("/{id}")
         @Produces(MediaType.APPLICATION_JSON)
         public Response getOfertas(@PathParam("id") int id){
-            Ofertas p = this.OfertasDAO.getOfertas(id);        
+            Ofertas p = this.OfertasDAO.getOferta(id);        
             if(p.getId()!=0){
                 return Response.ok(p).status(Response.Status.CREATED).build();
             }
